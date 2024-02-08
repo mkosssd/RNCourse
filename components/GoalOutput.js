@@ -1,30 +1,41 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 
 const GoalOutput = props => {
- const onDeleteGoal = (index) => {
-    props.DeleteHandler(index)
- }
-  return (
-    <Pressable onPress={()=>{onDeleteGoal(props.itemData.item.id)}}>
-      <View style={styles.goalsList}>
-        <Text style={styles.listText}>{props.itemData.item.text}</Text>
-      </View>
-    </Pressable>
-  )
+	const onDeleteGoal = index => {
+		props.DeleteHandler(index)
+	}
+	return (
+		<View style={styles.goalsList}>
+			<Pressable android_ripple={{ color: '#dddddd' }}
+				 onPress={() => { 
+					onDeleteGoal(props.itemData.item.id)
+				}}
+				style={({ pressed }) => {
+					pressed && styles.pressedItem
+				}}
+			>
+				<Text style={styles.listText}>{props.itemData.item.text}</Text>
+			</Pressable>
+		</View>
+	)
 }
 export default GoalOutput
 
 const styles = StyleSheet.create({
-  goalsList: {
-    borderColor: '#ccc',
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 5,
-    marginVertical: 5,
-    backgroundColor: 'blue'
-  },
-  listText: {
-    fontWeight: '900',
-    color: '#eee'
-  }
+	goalsList: {
+		borderColor: 'black',
+		borderWidth: 1,
+		borderRadius: 5,
+		marginVertical: 5,
+		backgroundColor: '#6c00fe',
+		flex: 1
+	},
+	listText: {
+		fontWeight: '900',
+		color: '#eee',
+		padding: 8
+	},
+	pressedItem: {
+		backgroundColor: '#dddddd'
+	}
 })
